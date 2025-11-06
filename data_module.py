@@ -1,8 +1,8 @@
 import pandas as pd
 import numpy as np
 
-def data_upload(route, file):
-    data = pd.read_csv(route+file)
+def data_upload(route, file, separator=","):
+    data = pd.read_csv(route+file,sep=separator)
     return data
 
 def show_columns(data):
@@ -33,7 +33,7 @@ def stadistics(data, type="Numeric"):
     Type Numeric or All
     """
     
-    if type == "All":
+    if type.lower() == "all":
         return data.describe(include="all")
     else:
         return data.describe()
