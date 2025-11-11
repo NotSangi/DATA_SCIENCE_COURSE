@@ -12,7 +12,6 @@ data = dm.data_upload('./data/', 'car_prices_modified.csv', ',')
 print(data.head())
 
 data = pd.get_dummies(data, columns=['Fuel_Type'])
-print(data)
 
 X = data[['Engine', 'Year', 'Fuel_Type_CNG', 'Fuel_Type_Diesel', 'Fuel_Type_LPG', 'Fuel_Type_Petrol']]
 y = data[['Power']]
@@ -24,6 +23,14 @@ model.fit(X_train, y_train)
 
 prediction = model.predict(X_test)
 
-sns.regplot(x='Engine', y='Power', data=data)
-sns.residplot(x=data['Engine'], y=data['Power'])
+# sns.regplot(x='Engine', y='Power', data=data)
+# sns.residplot(x=data['Engine'], y=data['Power'])
+# plt.show()
+
+plt.scatter(X_test['Engine'], y_test, label='Data', alpha=0.6)
+plt.scatter(X_test['Engine'], prediction, c='red', label='Prediction', alpha=0.6)
+plt.xlabel('Engine')
+plt.ylabel('Y')
+plt.legend()
+plt.grid()
 plt.show()
