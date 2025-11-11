@@ -55,3 +55,4 @@ pearson_coef, p_value = stats.pearsonr(data["Engine"], data["Power"])
 print(f'The Pearson Coefficiente is: {pearson_coef}')
 print(f'The P Value is: {p_value:.2f}')
 
+dm.save_data(data, './data/', 'car_prices_modified.csv')
