@@ -39,9 +39,9 @@ scaler = StandardScaler()
 # print('R2 Score: ', round(r2,2))
 
 
-# joblib.dump(model, "linear_regression.pkl")
+# joblib.dump(model, "models/linear_regression.pkl")
 
-model = joblib.load('linear_regression.pkl')
+model = joblib.load('models/linear_regression.pkl')
 
 new_data = np.array([[0.002, 18.3, 2.31, 5.63, 0, 6.757, 0.043, 2.65, 3.56, 0.2,4.56, 7.98, 32.1]])
 
