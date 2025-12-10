@@ -13,7 +13,7 @@ data.set_index("Index", inplace=True)
 
 # print(dm.show_columns(data))
 
-print(dm.stadistics(data, "All"))
+print(dm.statistics(data, "All"))
 
 # Null Values
 data = dm.replace_nulls(data, "Seats")

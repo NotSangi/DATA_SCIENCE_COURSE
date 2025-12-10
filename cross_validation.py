@@ -12,7 +12,7 @@ import joblib
 tips = sns.load_dataset('tips')
 
 print(tips)
-# print('Basic Stadistics \n', tips.describe())
+# print('Basic Statistics \n', tips.describe())
 # print('Data Types \n',tips.dtypes)
 # print('Basic Info \n', tips.info())
 

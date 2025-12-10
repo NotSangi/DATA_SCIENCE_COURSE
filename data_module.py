@@ -28,7 +28,7 @@ def change_type(data, column, type):
 def data_normalization(data, column, new_column):
     data[new_column] = (data[column] - data[column].min()) / (data[column].max() - data[column].min())
 
-def stadistics(data, type="Numeric"):
+def statistics(data, type="Numeric"):
     """
     Type Numeric or All
     """
@@ -57,7 +57,7 @@ if __name__ == '__main__':
     change_columns(data, columns_titles)
     print(show_columns(data))
     
-    print(stadistics(data))
+    print(statistics(data))
     
     print(data.info())
     replace_nulls(data, "Seats")
