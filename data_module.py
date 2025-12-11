@@ -1,13 +1,17 @@
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
 
+#Load the CSV in a DataSet
 def data_upload(route, file, separator=","):
     data = pd.read_csv(route+file,sep=separator)
     return data
 
+#Shows DataSets Columns
 def show_columns(data):
     return data.columns
 
+#Safe DataSet in CSV
 def save_data(data, route, file):
     data.to_csv(route+file)
     
@@ -37,29 +41,48 @@ def statistics(data, type="Numeric"):
         return data.describe(include="all")
     else:
         return data.describe()
-    
+
+# Replace Nulls With Mean of the Column
 def replace_nulls(data, column):
     column_mean = data[column].mean()
     data.replace({column: np.nan}, {column:column_mean}, inplace=True)
     return data
 
+# Data Visualization
+def boxplot_graph(column, title):
+    plt.boxplot(column)
+    plt.title('Title')
+    plt.show()
+    
+def scatter_graph(x,y,title="",x_label='X',y_label='Y'):
+    plt.scatter(x,y)
+    plt.title(title)
+    plt.xlabel(x_label)
+    plt.ylabel(y_label)
+    plt.show()
+
+    
 if __name__ == '__main__':
     route = "./data/"
     file = "car_prices.csv"
     data = data_upload(route, file)    
     
-    print(data.head(5))
-    print(show_columns(data))
+    data['Power'] = data['Power'].str.replace(' bhp', '', regex=False)
+    data['Power'] = data['Power'].str.replace('null', '', regex=False)
+    data['Power'] = pd.to_numeric(data['Power'], errors='coerce')
+    data.dropna(subset=['Power'], axis=0, inplace=True)
+
+    # print(data.head(5))
+    # print(show_columns(data))
     
-    # save_data(data, route, "copy.csv")
+    # # save_data(data, route, "copy.csv")
     
-    columns_titles = ['Index','Name', 'Location', 'Year', 'Kilometers_Driven', 'Fuel_Type', 'Transmission', 'Owner_Type', 'Mileage', 'Engine', 'Power', 'Seats', 'New_Price']
-    change_columns(data, columns_titles)
-    print(show_columns(data))
+    # columns_titles = ['Index','Name', 'Location', 'Year', 'Kilometers_Driven', 'Fuel_Type', 'Transmission', 'Owner_Type', 'Mileage', 'Engine', 'Power', 'Seats', 'New_Price']
+    # change_columns(data, columns_titles)
+    # print(show_columns(data))
     
-    print(statistics(data))
+    # print(statistics(data))
     
-    print(data.info())
-    replace_nulls(data, "Seats")
-    print(data.info())
-    
+    # print(data.info())
+    # replace_nulls(data, "Seats")
+    # print(data.info())
